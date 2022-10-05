@@ -1,18 +1,20 @@
-from dataclasses import fields
-from pyexpat import model
 import graphene
+from graphene_django import DjangoObjectType
 
 from .models import Book
 
-class BookType(graphene.ObjectType):
+class BookType(DjangoObjectType):
     class Meta:
-        model=Book,
-        fields="__all__"
+        model=Book
+        field="__all__"
 
 
 class Query(graphene.ObjectType):
     all_books=graphene.List(BookType)
 
+    def resolve_all_books(root,info):
+        return Book.objects.all()
 
 
-schema = graphene.Schema(query=Book)
+
+schema = graphene.Schema(query=Query)

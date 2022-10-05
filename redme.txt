@@ -1,0 +1,13 @@
+1. install requirement.txt
+2 .run python django server
+3.http://127.0.0.1:8000/graphql 
+4.{
+  allBooks{
+    id:id,
+    title:title
+    excerpt
+  }
+}
+
+#pass this query for getting ingo
+
