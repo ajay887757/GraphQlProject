@@ -11,3 +11,14 @@
 
 #pass this query for getting ingo
 
+
+# passing Specific d using this
+
+{
+  allBooks(id:1){
+    id:id
+    title:title
+    excerpt,
+  }
+}
+

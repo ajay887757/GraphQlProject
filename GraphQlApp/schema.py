@@ -13,8 +13,11 @@ class BookType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     all_books=graphene.List(BookType)
-
-    def resolve_all_books(root,info,*args,**kwargs):
+    # all_books=graphene.List(BookType,id=graphene.Int())   # to getting Input From Query Set
+    # def resolve_all_books(root,info,id,*args,**kwargs,):
+   
+  
+    def resolve_all_books(root,info,*args,**kwargs,):
         return Book.objects.all()
         
 
