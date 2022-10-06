@@ -1,6 +1,8 @@
 1. install requirement.txt
 2 .run python django server
 3.http://127.0.0.1:8000/graphql 
+
+# for getting all Data using GraphQl Query
 4.{
   allBooks{
     id:id,
@@ -35,11 +37,22 @@
 
 #  For adding data in db by using mutation this query you have to run
 mutation firstmutation{
-  updateTitle(name:"Anupam",description:"This is math Book"){
+  addEntry(name:"Jay ho",description:"This is math Book"){
     BookData{
       title,
       excerpt
     }
   }
   
+}
+
+# for updating Query in db using mutation
+
+
+mutation firstmutation{
+  updateEntry(id:1,title:"isha"){
+    BookData{
+      title
+    }
+  }
 }

@@ -12,6 +12,7 @@ class BookType(DjangoObjectType):
         field="__all__"
 
 
+# Gettting All Data From Db 
 class Query(graphene.ObjectType):
     all_books=graphene.List(BookType)
     all_books=graphene.List(BookType,data=graphene.String(),title_data=graphene.String())   # to getting Input From Query Set
@@ -23,7 +24,7 @@ class Query(graphene.ObjectType):
 
 
 #adding new entry using mutation on db   go throught to readme file
-class TitleMutation(graphene.Mutation):
+class BookMutation(graphene.Mutation):
     class Arguments:
         name=graphene.String(required=True)
         description=graphene.String()
@@ -35,12 +36,32 @@ class TitleMutation(graphene.Mutation):
         Books=Book(title=name,excerpt=description)
         Books.save()
 
-        return TitleMutation(BookData=Books)
+        return BookMutation(BookData=Books)
+
+
+# update Data Of Db using GraphQl Quary
+
+class UpdateBookMutation(graphene.Mutation):
+    class Arguments:
+        title=graphene.String(required=True)
+        id=graphene.ID()
+
+    BookData=graphene.Field(BookType)
+
+    @classmethod
+    def mutate(cls,root,info,title,id):
+        BooksInfo=Book.objects.get(id=id)
+        BooksInfo.title=title
+        BooksInfo.save()
+
+        return UpdateBookMutation(BookData=BooksInfo)
 
 
         
 class Mutation(graphene.ObjectType):
-    update_title=TitleMutation.Field()
+    add_entry=BookMutation.Field()
+    update_entry=UpdateBookMutation.Field()
+
 
 
 schema = graphene.Schema(query=Query,mutation=Mutation)
