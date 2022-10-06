@@ -22,3 +22,24 @@
   }
 }
 
+
+2.
+ {
+  allBooks(data:"{1,2,3}",titleData:"Ajay"){
+    id:id
+    title:title
+    excerpt,
+  }
+}
+
+
+#  For adding data in db by using mutation this query you have to run
+mutation firstmutation{
+  updateTitle(name:"Anupam",description:"This is math Book"){
+    BookData{
+      title,
+      excerpt
+    }
+  }
+  
+}
