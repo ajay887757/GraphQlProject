@@ -22,7 +22,7 @@ class Query(graphene.ObjectType):
         return Book.objects.all()
 
 
-#adding new entry using mutation on db  
+#adding new entry using mutation on db   go throught to readme file
 class TitleMutation(graphene.Mutation):
     class Arguments:
         name=graphene.String(required=True)
